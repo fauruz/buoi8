@@ -12,9 +12,9 @@ namespace b1
 {
     internal class ConnectPerson
     {
+        string constr = ConfigurationManager.ConnectionStrings["conStr"].ConnectionString;
         public bool addData(Person ps)
         {
-            string constr = ConfigurationManager.ConnectionStrings["conStr"].ConnectionString;
             SqlConnection con = new SqlConnection(constr);
             con.Open();       
             try
@@ -45,7 +45,6 @@ namespace b1
         public string getRow()
         {
             string b = "";
-            string constr = ConfigurationManager.ConnectionStrings["conStr"].ConnectionString;
             SqlConnection con = new SqlConnection(constr);
             SqlDataAdapter da = new SqlDataAdapter();
             DataTable dt = new DataTable();
@@ -72,7 +71,6 @@ namespace b1
         public List<Person> getData()
         {
             List<Person> lps = new List<Person>();
-            string constr = ConfigurationManager.ConnectionStrings["conStr"].ConnectionString;
             SqlConnection con = new SqlConnection(constr);
             SqlDataAdapter da = new SqlDataAdapter();
             DataTable dt = new DataTable();
@@ -100,7 +98,6 @@ namespace b1
         }
         public DataTable getTable()
         {
-            string constr = ConfigurationManager.ConnectionStrings["conStr"].ConnectionString;
             SqlConnection con = new SqlConnection(constr);
             SqlDataAdapter da;
             DataTable dt = new DataTable();
@@ -121,7 +118,6 @@ namespace b1
         public bool updateData(Person ps)
         {
             int kt = 0;
-            string constr = ConfigurationManager.ConnectionStrings["conStr"].ConnectionString;
             SqlConnection con = new SqlConnection(constr);
             con.Open();
             string sql = "select count(*) from Person where Id = " + ps.Id;
@@ -152,7 +148,6 @@ namespace b1
         public bool deleteData(Person ps)
         {
             int kt = 0;
-            string constr = ConfigurationManager.ConnectionStrings["conStr"].ConnectionString;
             SqlConnection con = new SqlConnection(constr);
             con.Open();
             string sql = "select count(*) from Person where Id = " + ps.Id;

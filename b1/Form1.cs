@@ -48,11 +48,11 @@ namespace b1
                 Person ps = getPerson();
                 if (obj.addData(ps))
                     MessageBox.Show("Created!");
-                Refresh();
+                EmptyBox();
                 btnRead_Click(sender, e);
             }
         }
-        private void Refresh()
+        private void EmptyBox()
         {
             txtId.Text = string.Empty;
             txtName.Text = string.Empty;
@@ -63,6 +63,7 @@ namespace b1
             ConnectPerson obj = new ConnectPerson();
             lblName.Text = obj.getRow();
             dataGridView1.DataSource = obj.getTable();
+            Combobox(sender, e);
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -73,7 +74,7 @@ namespace b1
                 Person ps = getPerson();
                 if (obj.updateData(ps))
                     MessageBox.Show("Updated!");
-                Refresh();
+                EmptyBox();
                 btnRead_Click(sender, e);
             }
         }
@@ -91,19 +92,34 @@ namespace b1
                 Person ps = getPerson();
                 if (obj.deleteData(ps))
                     MessageBox.Show("Deleted!");
-                Refresh();
+                EmptyBox();
                 btnRead_Click(sender, e);
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void Combobox(object sender, EventArgs e)
         {
+            cbbName.Items.Clear();
             ConnectPerson obj = new ConnectPerson();
             List<Person> lps = obj.getData();
             foreach (Person p in lps)
             {
                 cbbName.Items.Add(p.Name);
+                cbbName.SelectedIndex = 0;
             }
+        }
+        private void Form1_Load(object sender, EventArgs e)
+        {
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            EmptyBox();
+            dataGridView1.DataSource = null;
+            dataGridView1.Refresh();
+            lblName.Text = string.Empty;
+            cbbName.SelectedIndex = -1;
+            cbbName.Items.Clear();
         }
     }
 }
